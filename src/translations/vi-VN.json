@@ -1,0 +1,16 @@
+{
+    "APP_NAME": "ngX-Template",
+    "About": "Giới thiệu",
+    "Hello world !": "Hello world !",
+    "Home": "Trang chủ",
+    "Logged in as": "Logged in as",
+    "Login": "Đăng nhập",
+    "Logout": "Logout",
+    "Password": "Mật khẩu",
+    "Password is required": "Password is required",
+    "Username": "Username",
+    "Username is required": "Username is required",
+    "Username or password incorrect.": "Username or password incorrect.",
+    "Remember me": "Remember me",
+    "Version": "Version"
+}
