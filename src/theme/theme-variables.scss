@@ -2,19 +2,36 @@
  * Application global variables.
  */
 
-// Set Font Awesome font path
+/*---FONT---*/
+
+$font-family-serif: "Open Sans", sans-serif;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
-// ---------------------------------------------------------------------------
-// Bootstrap variables
-//
-// Override Bootstrap variables here to suite your theme.
-// Copy variables you want to customize from node_modules/bootstrap/scss/_variables.scss
+/*---COLORS---*/
 
-//
-// Color system
-//
-
+$white: #ffffff;
+$white1: #f2f3f8;
+$white2: #e4e8f0;
+$white3: #f9f9f9;
+$white4: #cccccc;
+$white5: #dddddd;
+$gray: #98a8b4;
+$gray1: #eeeeee;
+$gray2: #aea9c3;
+$gray3: #94a4b0;
+$dark: #2c304d;
+$dark2: #252946;
+$dark3: #40545a;
+$green: #5cb85c;
+$green1: #60c400;
+$blue: #5bc0de;
+$darkGreenMercon: #007d4c;
+$grayMercon: #6d6e70;
+$lightGreenMercon: #a3cf60;
+$lightRedMercon: #de544f;
+$yellowMercon: #ffce00;
+$orangeMercon: #f68932;
+$blackMercon: #000000;
 $white: #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -26,7 +43,6 @@ $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
-
 $blue: #0073dd;
 $indigo: #6610f2;
 $purple: #6f42c1;
@@ -37,7 +53,6 @@ $yellow: #ffc107;
 $green: #28a745;
 $teal: #20c997;
 $cyan: #17a2b8;
-
 $theme-colors: (
   primary: $blue,
   secondary: $gray-600,
@@ -48,7 +63,6 @@ $theme-colors: (
   light: $gray-100,
   dark: $gray-800
 );
-
 // Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
 // in components.
 @import "~bootstrap/scss/_functions";

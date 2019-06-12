@@ -1,0 +1,24 @@
+<div class="pagination-container" *ngIf="pager.pages && pager.pages.length > 0">
+  <ul class="page menu right">
+    <li class="item navigate pre {{ noPrevious() || clientState.isBusy ? 'disabled' : '' }}">
+      <a href (click)="selectPage(pager.currentPage - 1, $event)">{{ options.previousText }}</a>
+    </li>
+
+    <li
+      *ngFor="let page of pager.pages; trackBy: trackByFn"
+      [class.active]="pager.currentPage === page"
+      class="item {{ clientState.isBusy ? 'disabled' : '' }}"
+    >
+      <a
+        class="{{ pager.currentPage === page ? 'active' : 'not-selected-page' }}"
+        href
+        (click)="selectPage(page, $event)"
+        [innerHTML]="page"
+      ></a>
+    </li>
+
+    <li class="item navigate next {{ noNext() || clientState.isBusy ? 'disabled' : '' }}">
+      <a href (click)="selectPage(pager.currentPage + 1, $event)">{{ options.nextText }}</a>
+    </li>
+  </ul>
+</div>

@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
+import { AppNavModel, AppNavItem } from '@app/shared/models/app-nav/app-nav.model';
+import { navItems } from './navigation.model';
+import { UserRole, UserLogedinModel } from '@app/shared/models/user/user.model';
+import { JwtTokenHelper } from '@app/shared/common';
+import { AppAuthService } from '@app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,39 +14,65 @@ import { AuthenticationService, CredentialsService, I18nService } from '@app/cor
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-  menuHidden = true;
+  @Input() isToggleNav: boolean;
+  @Output() onToggleAppNav: EventEmitter<boolean> = new EventEmitter();
+  public navModels: AppNavModel = { items: navItems };
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService,
-    private i18nService: I18nService
-  ) {}
+  private locationPath: string;
+  private isAuthen: boolean;
+  private userInfo: UserLogedinModel;
+
+  constructor(private router: Router, private i18nService: I18nService, private authService: AppAuthService) {
+    this.isAuthen = this.authService.isAuthenticated();
+
+    if (this.isAuthen) {
+      this.userInfo = JwtTokenHelper.GetUserLoggedInInfo();
+    }
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.locationPath = event.urlAfterRedirects.slice(1);
+        let navigationPaths = this.locationPath.split('/');
+        this.navModels.items.map(main => {
+          main.children.map(parent => {
+            if (parent.url == navigationPaths[1]) {
+              parent.isActive = true;
+            }
+            if (parent.children.some(child => child.url == navigationPaths[1])) {
+              parent.isActive = true;
+            }
+          });
+        });
+      }
+    });
+  }
 
   ngOnInit() {}
 
-  toggleMenu() {
-    this.menuHidden = !this.menuHidden;
-  }
+  onToggleNav = (item: AppNavItem) => {
+    if (item) {
+      if (item.children.length <= 0) {
+        this.router.navigate(['admin', item.url]);
+      }
+      item.isActive = !item.isActive;
+    }
+  };
 
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
+  checkActivateUrl = (parentItem: AppNavItem) => {
+    let navigationPaths = this.locationPath ? this.locationPath.split('/') : [];
 
-  logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
-  }
+    if (!parentItem && !navigationPaths) {
+      return false;
+    }
 
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
+    return parentItem.url == navigationPaths[1] || parentItem.children.some(child => child.url == navigationPaths[1]);
+  };
 
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
-
-  get username(): string | null {
-    const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
-  }
+  onCheckPermision = (allowRows: UserRole[]) => {
+    if (allowRows.length == 0) {
+      return true;
+    }
+    return true;
+    //return allowRows && allowRows.some(r => this.userInfo.roles.indexOf(r) != -1);
+  };
 }

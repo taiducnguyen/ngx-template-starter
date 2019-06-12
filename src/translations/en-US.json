@@ -1,16 +1,162 @@
 {
-    "APP_NAME": "ngX-Template",
-    "About": "About",
-    "Hello world !": "Hello world !",
-    "Home": "Home",
-    "Logged in as": "Logged in as",
-    "Login": "Login",
-    "Logout": "Logout",
-    "Password": "Password",
-    "Password is required": "Password is required",
-    "Username": "Username",
-    "Username is required": "Username is required",
-    "Username or password incorrect.": "Username or password incorrect.",
-    "Remember me": "Remember me",
-    "Version": "Version"
+  "Commons": {
+    "Button": {
+      "ResetPassword": "Reset Password",
+      "SignIn": "Sign In",
+      "Save": "<i class='far fa-save mr-1'></i> Save",
+      "Cancel": "<i class='fas fa-ban mr-1'></i> Cancel",
+      "New": "<i class='fas fa-plus'></i> New",
+      "Edit": "<i class='fas fa-pencil-alt mr-1'></i> Edit",
+      "GoBack": "Go Back",
+      "Search": "<i class='fas fa-search mr-1'></i> Search",
+      "Import": "<i class='fas fa-upload'></i> Import",
+      "Filter": "<i class='fas fa-filter'></i> Filter"
+    },
+    "Select": {
+      "SelectCompany": "Select company",
+      "SelectUserRole": "Select user role",
+      "SelectScreenView": "Select screen view",
+      "SelectField": "Select field",
+      "SelectGroup": "Select a group",
+      "SelectUserType": "Select user type",
+      "SelectCounterPart": "Select counterpart",
+      "SelectContact": "Select contact"
+    },
+    "Error": {
+      "ErrRequired": "This field is required",
+      "ErrFormatEmail": "Email format should be <i>john@doe.com</i>",
+      "ErrPatternPassword": "This is required field and at least 8 characters and have one capital and alphanumeric characters",
+      "ErrPasswordMismatch": "Password mismatch",
+      "ErrFormatPhone": "Phone format is wrong",
+      "ErrWhiteSpace": "This field is only whitespace",
+      "ErrNoItem": "There is no item",
+      "ErrorStartDate": "Start date must be lesser than end date",
+      "ErrorEndDate": "End date must be greater than start date",
+      "ErrorOpenTime": "Open time must be lesser than close time",
+      "ErrorCloseTime": "Close time must be greater than open time",
+      "ErrorSearchAddress": "Address is not found"
+    },
+    "Texts": {
+      "ResetYourPassword": "Reset Your Password",
+      "Password": "Password",
+      "ConfirmPassword": "Confirm Password",
+      "Preferences": "Preferences",
+      "AuditTrail": "Audit Trail",
+      "KPI": "KPI",
+      "Email": "Email",
+      "Profile": "Profile",
+      "Company": "Company",
+      "Username": "Username",
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Phone": "Phone",
+      "ChangePassword": "Change Password",
+      "Unknown": "Unknown",
+      "UserType": "User type",
+      "CounterPart": "Counterpart",
+      "Active": "Active"
+    },
+    "Required": {
+      "PasswordRequired": "Password<span class='required'></span>",
+      "ConfirmPasswordRequired": "Confirm Password<span class='required'></span>",
+      "EmailRequired": "Email<span class='required'></span>",
+      "UsernameRequired": "Username<span class='required'></span>",
+      "OldPasswordRequired": "Old Password<span class='required'></span>",
+      "NewPasswordRequired": "New Password<span class='required'></span>",
+      "RepeatPasswordRequired": "Repeat Password<span class='required'></span>",
+      "CompanyRequired": "Company<span class='required'></span>",
+      "CounterPartRequired": "Counterpart<span class='required'></span>",
+      "FirstNameRequired": "First Name<span class='required'></span>",
+      "LastNameRequired": "Last Name<span class='required'></span>",
+      "RoleRequired": "Role<span class='required'></span>",
+      "RoleNameRequired": "Role Name<span class='required'></span>"
+    },
+    "HttpError": {
+      "incorrectEmailOrPasssword": "Email or password is not correct.",
+      "emailNotExist": "Email is not exist",
+      "oldPassIncorrect": "Old password is not match.",
+      "userNotFound": "User is not found.",
+      "Default": "We discovered unexpected system error, please try again later or contact to admin with number phone 0986.686.868.",
+      "emailTemplateInvalid": "Invalid Email Template.",
+      "invalidDocument": "Document already existed.",
+      "userExisted": "Email or username for company already existed.",
+      "emailExists": "Email already existed.",
+      "userNameExists": "Username already existed.",
+      "userProfileIsNotImage": "The input data must be image",
+      "userNameNotFound": "Username is not exist",
+      "roleNameExist": "Role name already existed.",
+      "screenExisted": "Screen view already existed.",
+      "fieldExisted": "Field already existed.",
+      "screenFieldExisted": "Screen and field mapping already existed.",
+      "roleConfigurationExisted": "The mapping for role, screen and field already existed.",
+      "groupExisted": "Group already existed.",
+      "counterPartGroupExisted": "Counter part group already existed.",
+      "notificationExisted": "Notification Name already existed.",
+      "contactsExisted": "Email or username for company already existed.",
+      "passwordNotMatch": "Password and confirm password is not match.",
+      "userDeactive": "User is inactive, please contact administrator.",
+      "notFoundRecord": "No record found on the server !",
+      "notFoundWarehouse": "Warehouse is not found, please update warehouse information to update this file."
+    }
+  },
+  "Components": {
+    "LoginAndSignUp": {
+      "TxtLoginAndSignUp": "Log In or Sign Up",
+      "TxtForgotPassword": "Forgot Password",
+      "TxtBackToLogin": "Back to login",
+      "BtnSend": "Send",
+      "TxtLoginFB": "<i class='fa fa-facebook'></i> Login with facebook",
+      "TxtLoginGG": "<i class='fa fa-google'></i> Login with google",
+      "SendPasswordSuccess": "We've sent you a verification email. <br/> We sent a recovery link to your email address:",
+      "SendSignInSuccess": "Check your inbox to verify your email <br/> We've sent an email to:",
+      "FollowInstructions": "Follow the instructions to verify your email address.",
+      "TokenExpired": "Your token was expired, please click resend button below to get new activate link.",
+      "ActivatedSuccess": "Your account has successfully been activated! You can now log in.",
+      "TxtActivateAccount": "Activate Account",
+      "TxtVerifyAccount": "Verify your account"
+    },
+    "Footer": {
+      "Copyright": "Copyright © 2018 Mercon Coffee Group. All rights reserved.",
+      "Version": "Version 1.0"
+    },
+    "ResetPassword": {
+      "AlertSuccess": "Your password has been changed successfully! <br/> Please click Signin button to login again."
+    },
+    "Login": {
+      "Welcome": "Welcome To Supply Chain!",
+      "Description": "Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.",
+      "SignIn": "Sign In To Supply Chain",
+      "ForgotPassword": "Forgot Password ?"
+    },
+    "ForgotPassword": {
+      "PasswordRecovery": "Password Recovery"
+    },
+    "UserProfile": {
+      "AlertSuccess": "Update success"
+    },
+    "ChangeEmailTemplate": {
+      "AlertSuccess": "Your changes are saved."
+    },
+    "EmailGenerated": {
+      "SubmitNotifications": "Submit Notifications",
+      "DeleteNotifications": "Delete Notifications"
+    }
+  },
+  "Nav": {
+    "MainView": "Main view",
+    "AdminView": "Admin",
+    "Admin": {
+      "EmailTemplate": "List of Templates",
+      "EmailGenerated": "Mails Generated",
+      "CounterpartConfiguration": "Counterpart Configuration",
+      "UserConfiguration": "User Configuration",
+      "FieldConfiguration": "Field Configuration",
+      "ActionsConfiguration": "Actions Configuration",
+      "AdminPermission": "Admin Permission",
+      "RoleManagement": "Role Management",
+      "UserLogs": "User Logs",
+      "Groups": "Groups",
+      "CounterpartGroup": "Counterpart Group"
+    }
+  }
 }

@@ -1,0 +1,8 @@
+@import "src/theme/theme-variables";
+footer.main-footer {
+  background: $white;
+  padding: 15px 30px;
+  border-top: 0.07rem solid $gray1;
+  box-shadow: 0 1px 15px 1px rgba(52, 40, 104, 0.08);
+  font-size: 0.8rem;
+}

@@ -1,9 +1,234 @@
 @import "src/theme/theme-variables";
-
-.navbar {
-  margin-bottom: $spacer;
+.header {
+  min-height: 70px;
+  position: relative;
 }
 
-.nav-link.dropdown-toggle {
-  cursor: pointer;
+.navbar-header {
+  .logo-big {
+    width: 170px;
+  }
+  .logo-small {
+    width: 70px;
+  }
+}
+
+.navbar-holder {
+  width: 100%;
+}
+
+.navbar {
+  padding: 0.5rem 1rem;
+}
+
+nav.navbar {
+  background: $white;
+  padding: 0 15px;
+  color: $gray2;
+  border-radius: 0;
+  box-shadow: 0 1px 0 $gray1;
+  z-index: 1000;
+  width: 100%;
+  .badge {
+    display: block;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .navbar-brand .brand-small {
+    display: none;
+  }
+  a {
+    color: inherit;
+  }
+  .container-fluid {
+    width: 100%;
+  }
+  .menu-btn {
+    margin-right: 0;
+    font-size: 1.2em;
+    vertical-align: middle;
+    padding: 0;
+    span {
+      background: $gray2;
+      width: 20px;
+      height: 2px;
+      display: block;
+      margin: 7px 0;
+      border-radius: 35px;
+      transition: all 0.3s cubic-bezier(0.81, -0.33, 0.345, 1.375);
+      &:nth-of-type(2) {
+        position: relative;
+        width: 30px;
+      }
+      &:last-of-type {
+        position: relative;
+        width: 15px;
+        margin-top: 0;
+      }
+      &:first-of-type {
+        margin-top: 0;
+        transition: all 0.6s;
+      }
+    }
+    &.active span {
+      &:first-of-type {
+        transform: translateX(10px);
+        margin-top: 0;
+      }
+      &:nth-of-type(2) {
+        transform: none;
+      }
+    }
+    span:last-of-type {
+      margin-top: 0;
+      transition: all 0.3s;
+    }
+    &.active span:last-of-type {
+      transform: translateX(15px);
+      margin-top: 0;
+    }
+  }
+  .nav-item > a {
+    position: relative;
+    font-size: 1.8rem;
+    padding: 0; // width: 50px;
+    text-align: center;
+    line-height: 70px;
+    span {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      border: 3px solid $white;
+      &.employee-name {
+        font-size: 0.9rem;
+        position: relative;
+        top: 0;
+        right: 0px;
+        border: none;
+        margin-left: 5px;
+      }
+    }
+    &.logout i {
+      margin-left: 10px;
+    }
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border: 0.2rem solid $white;
+  }
+  .user-size.dropdown-menu {
+    min-width: 250px;
+    overflow: hidden;
+    a {
+      font-weight: 600;
+      padding: 0.5rem 1.4rem;
+      border-bottom: 0 none;
+      position: relative;
+      &:hover {
+        background: none;
+      }
+    }
+    .separator {
+      margin: 1.4rem 0;
+      border-bottom: 0.07rem solid rgba(0, 0, 0, 0.05) !important;
+    }
+    li.welcome {
+      margin: 0 auto;
+      padding: 1.4rem 1.4rem 0 1.4rem;
+      position: relative;
+      a.edit-profil {
+        position: absolute;
+        background: $white;
+        font-size: 1.4rem;
+        border-radius: 50%;
+        left: 130px;
+        top: 70px;
+        box-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.1);
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        padding: 0;
+      }
+      img {
+        display: block;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 10px;
+      }
+      p {
+        margin-top: 25px;
+        text-align: center;
+        small {
+          display: block;
+          font-size: 12px;
+        }
+      }
+    }
+    h2 {
+      color: $darkGreenMercon;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-align: center;
+      margin: 0;
+    }
+    a {
+      h6 {
+        transition: all 0.4s ease;
+      }
+      &:hover h6 {
+        margin-left: 5px;
+      }
+    }
+  }
+  .dropdown-menu .user-body h6 {
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  .user-size.dropdown-menu a.logout {
+    background: $lightRedMercon;
+    width: 70px;
+    height: 70px;
+    color: $white;
+    border-radius: 50%;
+    text-align: center !important;
+    padding: 0;
+    line-height: 55px;
+    position: relative;
+    bottom: -20px;
+    font-size: 1.8rem;
+    margin: 10px auto 0;
+    &:hover {
+      background: $orangeMercon;
+    }
+  }
+  .dropdown-menu {
+    right: 0;
+    min-width: 300px;
+    left: auto;
+    margin-top: 0;
+    padding: 0;
+    max-width: 400px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    a {
+      padding: 1rem 0 1rem 1rem;
+      font-size: 0.85rem;
+      color: $grayMercon;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      &:hover {
+        color: $blackMercon;
+      }
+    }
+  }
 }

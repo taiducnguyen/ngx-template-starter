@@ -1,3 +1,83 @@
-<nav class="">
-  Nagigation
-</nav>
+<div class="default-sidebar">
+  <nav
+    class="side-navbar box-scroll sidebar-scroll"
+    [ngClass]="{ shrinked: isToggleNav }"
+    tabindex="1"
+    style="outline: none;"
+  >
+    <div class="nav-wrapper">
+      <ng-template *ngIf="navModels && navModels.items" ngFor let-item [ngForOf]="navModels.items">
+        <span
+          *ngIf="item.type == 'nav-category' && onCheckPermision(item.allowRoles)"
+          class="heading"
+          [innerHTML]="i18nService.getTransByKey(item.translateKey)"
+        ></span>
+        <ul class="list-unstyled">
+          <li
+            *ngFor="let parentItem of item.children"
+            class="treeview {{ parentItem.isActive ? 'menu-open' : '' }} {{
+              checkActivateUrl(parentItem) ? 'active' : ''
+            }}"
+          >
+            <a
+              *ngIf="parentItem.children && parentItem.children.length > 0 && onCheckPermision(parentItem.allowRoles)"
+              [attr.aria-expanded]="parentItem.isActive"
+              data-toggle="collapse"
+              class="parent collapsed"
+              (click)="onToggleNav(parentItem)"
+            >
+              <i class="{{ parentItem.icon }}"></i>
+              <span [innerHTML]="i18nService.getTransByKey(parentItem.translateKey)"></span>
+            </a>
+            <a
+              *ngIf="
+                parentItem.children &&
+                parentItem.children.length <= 0 &&
+                !!parentItem.url &&
+                onCheckPermision(parentItem.allowRoles)
+              "
+              [routerLink]="['', parentItem.url]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="parent"
+            >
+              <i class="{{ parentItem.icon }}"></i>
+              <span [innerHTML]="i18nService.getTransByKey(parentItem.translateKey)"></span>
+            </a>
+            <a
+              *ngIf="
+                parentItem.children &&
+                parentItem.children.length <= 0 &&
+                parentItem.url == '' &&
+                onCheckPermision(parentItem.allowRoles)
+              "
+              [routerLink]="['']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="parent"
+            >
+              <i class="{{ parentItem.icon }}"></i>
+              <span [innerHTML]="i18nService.getTransByKey(parentItem.translateKey)"></span>
+            </a>
+            <ul
+              *ngIf="parentItem.children && parentItem.children.length > 0 && onCheckPermision(parentItem.allowRoles)"
+              class="list-unstyled pt-0 collapse"
+              [ngClass]="{ show: parentItem.isActive }"
+            >
+              <li *ngFor="let childItem of parentItem.children">
+                <a
+                  [routerLink]="['', childItem.url]"
+                  *ngIf="onCheckPermision(childItem.allowRoles)"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  [innerHTML]="i18nService.getTransByKey(childItem.translateKey)"
+                >
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </nav>
+</div>

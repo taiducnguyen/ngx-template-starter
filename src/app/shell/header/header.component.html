@@ -1,49 +1,125 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="https://github.com/ngx-rocket" translate>APP_NAME</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      aria-controls="navbar-menu"
-      aria-label="Toggle navigation"
-      (click)="toggleMenu()"
-      [attr.aria-expanded]="!menuHidden"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
-          <i class="fas fa-home"></i>
-          <span translate>Home</span>
+<header class="header">
+  <nav class="navbar fixed-top">
+    <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+      <div class="navbar-header">
+        <a
+          [routerLink]="['']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-brand"
+        >
+          <div class="brand-image brand-big" [ngStyle]="{ display: isToggleNav ? 'none' : 'block' }">
+            <img src="assets/images/logo_mercon.png" alt="logo" class="logo-big" />
+          </div>
+          <div class="brand-image brand-small" [ngStyle]="{ display: !isToggleNav ? 'none' : 'block' }">
+            <img src="assets/images/logo_mercon.png" alt="logo" class="logo-small" />
+          </div>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
-          <i class="fas fa-question-circle"></i>
-          <span translate>About</span>
+
+        <a id="toggle-btn" (click)="onToggleAppNav()" class="menu-btn" [ngClass]="{ active: !isToggleNav }">
+          <span></span>
+          <span></span>
+          <span></span>
         </a>
       </div>
-      <div class="navbar-nav ml-auto">
-        <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{ currentLanguage }}</a>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-              {{ language }}
-            </button>
-          </div>
-        </div>
-        <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
-            <i class="fas fa-user-circle"></i>
+
+      <ul *ngIf="isAuthen" class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+        <li class="nav-item dropdown" [ngClass]="{ show: isToggleUserProfile }">
+          <a
+            id="user"
+            rel="nofollow"
+            (click)="toggleUserProfile()"
+            data-target="#"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            class="nav-link"
+          >
+            <img
+              *ngIf="userProfile.avatar && userProfile.avatar.data && userProfile.avatar.mediaType"
+              src="{{ 'data:' + userProfile.avatar.mediaType + ';base64,' + userProfile.avatar.data }}"
+              alt="avatar"
+              class="avatar rounded-circle"
+            />
+            <img
+              *ngIf="!userProfile.avatar || !userProfile.avatar.data || !userProfile.avatar.mediaType"
+              src="assets/images/no-image.png"
+              alt="avatar"
+              class="avatar rounded-circle"
+            />
+            <span class="employee-name hidden-xs"
+              >{{ userProfile && userProfile.firstName }} {{ userProfile && userProfile.lastName }}</span
+            >
           </a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown">
-            <h6 class="dropdown-header">
-              <span translate>Logged in as</span> <b>{{ username }}</b>
-            </h6>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" (click)="logout()" translate>Logout</button>
-          </div>
-        </div>
-      </div>
+          <ul aria-labelledby="user" class="user-size dropdown-menu" [ngClass]="{ show: isToggleUserProfile }">
+            <li class="welcome">
+              <a
+                [routerLink]="['', 'sp', 'user-profile']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="toggleUserProfile(false)"
+                class="edit-profil"
+              >
+                <i class="fas fa-cog"></i>
+              </a>
+              <img
+                *ngIf="userProfile.avatar && userProfile.avatar.data && userProfile.avatar.mediaType"
+                src="{{ 'data:' + userProfile.avatar.mediaType + ';base64,' + userProfile.avatar.data }}"
+                alt="avatar"
+                class="rounded-circle"
+              />
+              <img
+                *ngIf="!userProfile.avatar || !userProfile.avatar.data || !userProfile.avatar.mediaType"
+                src="assets/images/no-image.png"
+                alt="avatar"
+                class="rounded-circle"
+              />
+              <p>
+                {{ userProfile && userProfile.firstName }} {{ userProfile && userProfile.lastName }}
+                <small>{{ userProfile && userProfile.companyName }}</small>
+                <small>{{ userProfile && userProfile.roleName }}</small>
+                <small *ngIf="userProfile.userType == 2">{{ userProfile && userProfile.counterpartName }}</small>
+              </p>
+            </li>
+            <li class="separator"></li>
+            <li>
+              <a
+                [routerLink]="['', 'sp', 'user-preferences']"
+                class="dropdown-item"
+                [innerHTML]="'Commons.Texts.Preferences' | translate"
+                (click)="toggleUserProfile(false)"
+              ></a>
+            </li>
+            <li>
+              <a
+                [routerLink]="['', 'sp', 'audit-trail']"
+                class="dropdown-item"
+                [innerHTML]="'Commons.Texts.AuditTrail' | translate"
+                (click)="toggleUserProfile(false)"
+              ></a>
+            </li>
+            <li>
+              <a
+                [routerLink]="['', 'sp', 'user-kpi']"
+                class="dropdown-item no-padding-bottom"
+                [innerHTML]="'Commons.Texts.KPI' | translate"
+                (click)="toggleUserProfile(false)"
+              ></a>
+            </li>
+            <li>
+              <a
+                rel="nofollow"
+                (click)="onLogout()"
+                [ngClass]="{ 'link-disabled': clientState.isBusy }"
+                class="dropdown-item logout text-center"
+              >
+                <i class="fas fa-power-off"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </nav>
 </header>
+<div class="overlay {{ isToggleUserProfile ? 'is-open' : '' }}" (click)="toggleUserProfile(false)"></div>

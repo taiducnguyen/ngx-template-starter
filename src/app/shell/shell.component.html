@@ -1,3 +1,15 @@
-<app-header></app-header>
-<app-navigation></app-navigation>
-<router-outlet></router-outlet>
+<div class="page">
+  <app-header (onToggleNav)="onToggleNav($event)"></app-header>
+  <div class="page-content d-flex align-items-stretch">
+    <app-navigation [isToggleNav]="isToggleNav"></app-navigation>
+    <div class="content-inner" [ngClass]="{ active: isToggleNav }">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  <!-- <div [hidden]="!clientState.isBusy">
+        <loading-state></loading-state>
+    </div> -->
+</div>

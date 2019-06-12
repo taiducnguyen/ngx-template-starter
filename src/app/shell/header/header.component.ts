@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
+import { StorageKey } from '@app/shared/models/storage-key/storage-key';
+import { ApiError } from '@app/shared/models/api-response/api-response';
+import { UserProfileModel, UserLogedinModel } from '@app/shared/models/user/user.model';
+import { JwtTokenHelper } from '@app/shared/common';
+import { AppAuthService } from '@app/shared/services/auth/auth.service';
+import { StorageService } from '@app/shared/services/client/storage.service';
+import { ClientState } from '@app/shared/services/client/client-state';
+import { LoginService } from '@app/shared/services/api/app/login.service';
 
 @Component({
   selector: 'app-header',
@@ -9,39 +17,72 @@ import { AuthenticationService, CredentialsService, I18nService } from '@app/cor
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  menuHidden = true;
+  @Output() onToggleNav: EventEmitter<boolean> = new EventEmitter();
+  public isToggleNav: boolean = false;
 
+  public isAuthen: boolean = true;
+  public isToggleUserProfile: boolean;
+  private userInfo: UserLogedinModel;
+  private userProfile: UserProfileModel = new UserProfileModel();
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService,
+    private authService: AppAuthService,
+    private storageService: StorageService,
+    private clientState: ClientState,
+    private loginService: LoginService,
     private i18nService: I18nService
   ) {}
 
-  ngOnInit() {}
-
-  toggleMenu() {
-    this.menuHidden = !this.menuHidden;
+  ngOnInit() {
+    // this.isAuthen = this.authService.isAuthenticated();
+    // if (this.isAuthen) {
+    //   this.userInfo = JwtTokenHelper.GetUserLoggedInInfo();
+    //   this.onGetUserProfile();
+    // }
+    // this.clientState.reloadUserProfile.subscribe(isReloadComponent => {
+    //   this.onGetUserProfile();
+    // })
   }
 
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
+  public onGetUserProfile = () => {
+    // let userInfoDetails = JwtTokenHelper.GetUserInfoDetails()
+    // if (userInfoDetails) {
+    //   this.userProfile = userInfoDetails;
+    //   return;
+    // }
+    // // this.clientState.isBusy = true;
+    // this.userService.onGetUserDetails(this.userInfo.userId).subscribe(res => {
+    //   this.userProfile = res.content ? <UserProfileModel>{ ...res.content } : null;
+    //   // this.clientState.isBusy = false;
+    // }, (err: ApiError) => {
+    //   this.clientState.isBusy = false;
+    // });
+  };
 
-  logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
-  }
+  toggleUserProfile = (isToggle: boolean) => {
+    this.isToggleUserProfile = isToggle == false ? false : !this.isToggleUserProfile;
+  };
 
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
+  onLogout = () => {
+    // this.clientState.isBusy = true;
+    // Promise.all([
+    //   this.loginService.onLogout(this.userInfo.userId),
+    //   this.storageService.onRemoveTokens([StorageKey.User, StorageKey.Token, StorageKey.UserInfo]),
+    // ]).then(res => {
+    //   this.userInfo = null;
+    //   this.router.navigate(['login']);
+    //   this.clientState.isBusy = false;
+    // }, err => {
+    //   this.clientState.isBusy = false;
+    // })
+  };
 
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
+  onToggleAppNav = () => {
+    this.isToggleNav = !this.isToggleNav;
+    this.onToggleNav.emit(this.isToggleNav);
+  };
 
-  get username(): string | null {
-    const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
+  ngOnDestroy(): void {
+    // this.clientState.reloadUserProfile.unsubscribe();
   }
 }

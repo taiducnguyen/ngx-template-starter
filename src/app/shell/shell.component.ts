@@ -6,7 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shell.component.scss']
 })
 export class ShellComponent implements OnInit {
+  isToggleNav: boolean;
+  isToggleSearch: boolean;
+
   constructor() {}
 
   ngOnInit() {}
+
+  onToggleNav = (isToggle: boolean) => {
+    this.isToggleNav = isToggle;
+  };
+
+  onToggleSearch = (isToggleSearch: boolean) => {
+    this.isToggleSearch = isToggleSearch == false ? isToggleSearch : !this.isToggleSearch;
+  };
 }

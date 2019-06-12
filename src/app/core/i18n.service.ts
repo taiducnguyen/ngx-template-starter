@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { Logger } from './logger.service';
 import enUS from '../../translations/en-US.json';
-import frFR from '../../translations/fr-FR.json';
 import viVN from '../../translations/vi-VN.json';
+import { ApiError } from '@app/shared/models/api-response/api-response';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
@@ -30,7 +30,6 @@ export class I18nService {
   constructor(private translateService: TranslateService) {
     // Embed languages to avoid extra HTTP requests
     translateService.setTranslation('en-US', enUS);
-    translateService.setTranslation('fr-FR', frFR);
     translateService.setTranslation('vi-VN', viVN);
   }
 
@@ -91,4 +90,41 @@ export class I18nService {
   get language(): string {
     return this.translateService.currentLang;
   }
+
+  getTransError = (error: ApiError) => {
+    if (!error) {
+      return;
+    }
+    let key = 'Commons.HttpError.' + error.errorType;
+    let translated = this.translateService.instant(key);
+    if (translated == key) {
+      return error.message || this.translateService.instant('Commons.HttpError.Default');
+      //return this.translateService.instant('Commons.HttpError.Default');
+    } else {
+      return translated;
+    }
+  };
+
+  getTransByKey = (key: string) => {
+    let translated = this.translateService.instant(key);
+    if (translated == key) {
+      return this.translateService.instant('Commons.Texts.Unknown');
+    } else {
+      return translated;
+    }
+  };
+
+  getTransEnum = (enumName: string) => {
+    let key = 'Commons.Enums.' + enumName;
+    let translated = this.translateService.instant(key);
+    if (translated == key) {
+      return this.translateService.instant('Commons.Texts.Unknown');
+    } else {
+      return translated;
+    }
+  };
+
+  getCurrentLanguageCode = (): string => {
+    return this.language.split('-')[0].toLocaleLowerCase();
+  };
 }

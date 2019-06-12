@@ -15,6 +15,8 @@ import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { StorageKey } from './shared/models/storage-key/storage-key';
 
 @NgModule({
   imports: [
@@ -22,6 +24,12 @@ import { AppRoutingModule } from './app-routing.module';
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        throwNoTokenError: false,
+        tokenGetter: GetToken
+      }
+    }),
     TranslateModule.forRoot(),
     NgbModule,
     CoreModule,
@@ -37,3 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function GetToken() {
+  return localStorage.getItem(StorageKey.Token);
+}
