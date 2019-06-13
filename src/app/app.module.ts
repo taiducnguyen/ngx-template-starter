@@ -9,14 +9,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { HomeModule } from './home/home.module';
-import { ShellModule } from './shell/shell.module';
-import { AboutModule } from './about/about.module';
-import { LoginModule } from './login/login.module';
+import { HomeModule } from './modules/home/home.module';
+import { AboutModule } from './modules/about/about.module';
+import { LoginModule } from './modules/login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { StorageKey } from './shared/models/storage-key/storage-key';
+import { NoContentComponent } from './404/not-found.component';
+import { AccessDeniedComponent } from './403/access-denied.component';
+import { ShellModule } from './modules/shell/shell.module';
 
 @NgModule({
   imports: [
@@ -40,7 +42,7 @@ import { StorageKey } from './shared/models/storage-key/storage-key';
     LoginModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, NoContentComponent, AccessDeniedComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

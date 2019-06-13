@@ -1,0 +1,20 @@
+<div class="bg-error-01 h-100">
+  <div class="container-fluid h-100 error-01">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="error-container mx-auto text-center">
+          <h1>403</h1>
+          <h2>Access Denied!</h2>
+          <p>But we have lots of other pages for you to see.</p>
+          <a
+            class="btn btn-secondary"
+            [routerLink]="['', '/']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [innerHTML]="'Commons.Button.GoBack' | translate"
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

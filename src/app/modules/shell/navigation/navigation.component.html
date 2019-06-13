@@ -7,11 +7,7 @@
   >
     <div class="nav-wrapper">
       <ng-template *ngIf="navModels && navModels.items" ngFor let-item [ngForOf]="navModels.items">
-        <span
-          *ngIf="item.type == 'nav-category' && onCheckPermision(item.allowRoles)"
-          class="heading"
-          [innerHTML]="i18nService.getTransByKey(item.translateKey)"
-        ></span>
+        <!-- <span *ngIf="item.type == 'nav-category' && onCheckPermision(item.allowRoles)" class="heading" [innerHTML]="i18nService.getTransByKey(item.translateKey)"></span> -->
         <ul class="list-unstyled">
           <li
             *ngFor="let parentItem of item.children"

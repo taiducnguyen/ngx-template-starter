@@ -1,0 +1,41 @@
+@import "src/theme/theme-variables";
+.bg-error-01 {
+  background: $lightRedMercon url(~/assets/images/clouds.png) no-repeat bottom center;
+}
+
+.error-01 {
+  .error-container {
+    display: block;
+  }
+  h1 {
+    font-size: 12rem;
+    color: $white;
+    -webkit-transform: skewY(-15deg);
+    -ms-transform: skewY(-15deg);
+    transform: skewY(-15deg);
+    text-shadow: 1px 1px 1px $lightRedMercon, 2px 2px 1px $lightRedMercon, 3px 3px 1px $lightRedMercon,
+      4px 4px 1px $lightRedMercon, 5px 5px 1px $lightRedMercon, 6px 6px 1px $lightRedMercon, 7px 7px 1px $lightRedMercon,
+      8px 8px 1px $lightRedMercon, 9px 9px 1px $lightRedMercon, 10px 10px 1px $orangeMercon, 11px 11px 1px $orangeMercon,
+      12px 12px 1px $orangeMercon, 13px 13px 1px $orangeMercon, 14px 14px 1px $orangeMercon, 15px 15px 1px $orangeMercon,
+      16px 16px 1px $orangeMercon, 17px 17px 1px $orangeMercon, 18px 18px 1px $orangeMercon, 19px 19px 1px $orangeMercon,
+      20px 20px 1px $orangeMercon, 21px 21px 1px $orangeMercon, 22px 22px 1px $orangeMercon, 23px 23px 1px $orangeMercon,
+      24px 24px 1px $orangeMercon, 25px 25px 1px $orangeMercon, 26px 26px 1px $orangeMercon, 27px 27px 1px $orangeMercon,
+      28px 28px 1px $orangeMercon, 29px 29px 1px $orangeMercon, 30px 30px 1px $orangeMercon;
+    -webkit-backface-visibility: hidden;
+  }
+  h2 {
+    font-size: 2rem;
+    color: $white;
+    margin-top: 3rem;
+  }
+  p {
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    color: $white;
+  }
+  .btn {
+    margin-top: 1rem;
+    background: $white;
+    color: $lightRedMercon;
+  }
+}

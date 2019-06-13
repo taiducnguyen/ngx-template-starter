@@ -22,7 +22,7 @@
     z-index: 999;
     position: relative;
     height: 100%;
-    padding: 80px 0;
+    padding: 86px 0;
     display: block;
     a {
       color: inherit;
@@ -30,13 +30,14 @@
       font-size: 0.9rem;
       &[data-toggle="collapse"]::before {
         font-size: 0.85rem;
-        content: "\f3cf";
+        content: "\f053";
         display: inline-block;
+        font-family: "Font Awesome 5 Free";
         transform: translateY(-50%);
-        font-family: "ionicons";
         position: absolute;
         top: 50%;
         right: 20px;
+        font-weight: 600;
       }
       &[aria-expanded="true"] {
         background: $dark2;
@@ -46,7 +47,7 @@
           color: $white;
         }
         &::before {
-          content: "";
+          content: "\f078";
         }
       }
       i {

@@ -143,20 +143,10 @@
     }
   },
   "Nav": {
-    "MainView": "Main view",
     "AdminView": "Admin",
     "Admin": {
-      "EmailTemplate": "List of Templates",
-      "EmailGenerated": "Mails Generated",
-      "CounterpartConfiguration": "Counterpart Configuration",
-      "UserConfiguration": "User Configuration",
-      "FieldConfiguration": "Field Configuration",
-      "ActionsConfiguration": "Actions Configuration",
-      "AdminPermission": "Admin Permission",
-      "RoleManagement": "Role Management",
-      "UserLogs": "User Logs",
-      "Groups": "Groups",
-      "CounterpartGroup": "Counterpart Group"
+      "EmailTemplate": "Danh sách Email",
+      "Employee": "Nhân viên"
     }
   }
 }
