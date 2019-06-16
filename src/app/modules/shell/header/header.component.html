@@ -23,9 +23,7 @@
         </a>
       </div>
       <div class="float-right" aria-labelledby="language-dropdown">
-        <dropdown [data]="languages" (onSelectedChange)="setLanguage($event)">
-          {{ language }}
-        </dropdown>
+        <dropdown [data]="languages" (onSelectedChange)="setLanguage($event)"></dropdown>
       </div>
       <ul *ngIf="isAuthen" class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
         <li class="nav-item dropdown" [ngClass]="{ show: isToggleUserProfile }">

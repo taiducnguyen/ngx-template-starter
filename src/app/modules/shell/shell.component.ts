@@ -10,7 +10,7 @@ export class ShellComponent implements OnInit {
   isToggleNav: boolean;
   isToggleSearch: boolean;
 
-  constructor(private clientState: ClientState) {}
+  constructor(public clientState: ClientState) {}
 
   ngOnInit() {}
 
