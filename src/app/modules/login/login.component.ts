@@ -9,6 +9,7 @@ import { ClientState } from '@app/shared/services/client/client-state';
 import { AuthenticationService, I18nService } from '@app/core';
 import { StorageService } from '@app/shared/services/client/storage.service';
 import { LoginService } from '@app/shared/services/api/app/login.service';
+import { DropdownModel } from '@app/shared/models/dropdown/dropdown.model';
 
 @Component({
   selector: 'login',
@@ -16,9 +17,9 @@ import { LoginService } from '@app/shared/services/api/app/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private userContextModel: UserContextModel = new UserContextModel();
-  private isError: boolean;
-  private loginError: ApiError;
+  public userContextModel: UserContextModel = new UserContextModel();
+  public isError: boolean;
+  public loginError: ApiError;
   private returnUrl: string;
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  get currentLanguage(): string {
+    return this.i18nService.language;
+  }
+
+  get languages(): DropdownModel[] {
+    return this.i18nService.supportedLanguages.map(l => {
+      return <DropdownModel>{ value: l, text: l.toString(), selected: l == this.currentLanguage };
+    });
+  }
+
   onLogin = (form: NgForm) => {
     if (form.invalid) {
       return;
@@ -46,12 +57,10 @@ export class LoginComponent implements OnInit {
     this.storageService.onRemoveToken(StorageKey.UserInfo);
     this.loginService.onLogin(this.userContextModel).subscribe(
       res => {
-        let userLoggedinModel = <UserLogedinModel>{ ...res.content };
-        // userLoggedinModel.roles = userLoggedinModel.ro ? [UserRole.Admin]
-        //   : userLoggedinModel.userType == UserType.Online ? [UserRole.MerconEmployee] : [];
-
-        if (userLoggedinModel && userLoggedinModel.token) {
-          this.storageService.onSetToken(StorageKey.Token, userLoggedinModel.token);
+        let userLoggedinModel = <UserLogedinModel>{ ...res };
+        userLoggedinModel.roles = [userLoggedinModel.userType];
+        if (userLoggedinModel && userLoggedinModel.access_token) {
+          this.storageService.onSetToken(StorageKey.Token, userLoggedinModel.access_token);
           this.storageService.onSetToken(StorageKey.User, JwtTokenHelper.CreateSigningToken(userLoggedinModel));
           this.router.navigate([this.returnUrl]);
         }
@@ -64,4 +73,8 @@ export class LoginComponent implements OnInit {
       }
     );
   };
+
+  setLanguage(languageDropdown: DropdownModel) {
+    this.i18nService.language = languageDropdown.value.toString();
+  }
 }

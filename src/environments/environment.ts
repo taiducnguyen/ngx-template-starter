@@ -13,7 +13,7 @@ import env from './.env';
 export const environment = {
   production: false,
   version: env.npm_package_version + '-dev',
-  serverUrl: '/api',
+  serverUrl: 'http://103.77.167.144:8089/',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'vi-VN']
 };

@@ -5,8 +5,12 @@ import { AccessDeniedComponent } from './403/access-denied.component';
 
 const routes: Routes = [
   // Fallback when no prior route is matched
-  { path: '**', component: NoContentComponent },
-  { path: 'access-denied', component: AccessDeniedComponent }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
+  { path: 'home', loadChildren: './modules/home/home.module#HomeModule' },
+  { path: 'about', loadChildren: './modules/about/about.module#AboutModule' },
+  { path: 'access-denied', component: AccessDeniedComponent },
+  { path: '**', component: NoContentComponent }
 ];
 
 @NgModule({

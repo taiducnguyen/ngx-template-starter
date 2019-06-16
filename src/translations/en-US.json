@@ -71,33 +71,7 @@
       "RoleRequired": "Role<span class='required'></span>",
       "RoleNameRequired": "Role Name<span class='required'></span>"
     },
-    "HttpError": {
-      "incorrectEmailOrPasssword": "Email or password is not correct.",
-      "emailNotExist": "Email is not exist",
-      "oldPassIncorrect": "Old password is not match.",
-      "userNotFound": "User is not found.",
-      "Default": "We discovered unexpected system error, please try again later or contact to admin with number phone 0986.686.868.",
-      "emailTemplateInvalid": "Invalid Email Template.",
-      "invalidDocument": "Document already existed.",
-      "userExisted": "Email or username for company already existed.",
-      "emailExists": "Email already existed.",
-      "userNameExists": "Username already existed.",
-      "userProfileIsNotImage": "The input data must be image",
-      "userNameNotFound": "Username is not exist",
-      "roleNameExist": "Role name already existed.",
-      "screenExisted": "Screen view already existed.",
-      "fieldExisted": "Field already existed.",
-      "screenFieldExisted": "Screen and field mapping already existed.",
-      "roleConfigurationExisted": "The mapping for role, screen and field already existed.",
-      "groupExisted": "Group already existed.",
-      "counterPartGroupExisted": "Counter part group already existed.",
-      "notificationExisted": "Notification Name already existed.",
-      "contactsExisted": "Email or username for company already existed.",
-      "passwordNotMatch": "Password and confirm password is not match.",
-      "userDeactive": "User is inactive, please contact administrator.",
-      "notFoundRecord": "No record found on the server !",
-      "notFoundWarehouse": "Warehouse is not found, please update warehouse information to update this file."
-    }
+    "HttpError": {}
   },
   "Components": {
     "LoginAndSignUp": {
@@ -126,7 +100,8 @@
       "Welcome": "Welcome To Supply Chain!",
       "Description": "Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.",
       "SignIn": "Sign In To Supply Chain",
-      "ForgotPassword": "Forgot Password ?"
+      "ForgotPassword": "Forgot Password ?",
+      "RememberMe": "Remember me"
     },
     "ForgotPassword": {
       "PasswordRecovery": "Password Recovery"
@@ -143,20 +118,10 @@
     }
   },
   "Nav": {
-    "MainView": "Main view",
     "AdminView": "Admin",
     "Admin": {
-      "EmailTemplate": "List of Templates",
-      "EmailGenerated": "Mails Generated",
-      "CounterpartConfiguration": "Counterpart Configuration",
-      "UserConfiguration": "User Configuration",
-      "FieldConfiguration": "Field Configuration",
-      "ActionsConfiguration": "Actions Configuration",
-      "AdminPermission": "Admin Permission",
-      "RoleManagement": "Role Management",
-      "UserLogs": "User Logs",
-      "Groups": "Groups",
-      "CounterpartGroup": "Counterpart Group"
+      "Home": "Home",
+      "About": "About"
     }
   }
 }

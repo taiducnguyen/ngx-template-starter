@@ -18,15 +18,15 @@ export class JwtTokenHelper {
     return encodedSource;
   };
 
-  public static CreateUnsignedToken = (data: any): string => {
+  public static CreateUnsignedToken = (data: any, expiredTime?: number): string => {
     let header = {
       alg: 'HS256',
       typ: 'JWT'
     };
-
+    let exp = expiredTime ? expiredTime : Math.floor(Date.now() / 1000) + 60 * 60;
     let stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
     let encodedHeader = JwtTokenHelper.base64url(stringifiedHeader);
-    let jwtData = { ...data, exp: Math.floor(Date.now() / 1000) + 60 * 60 };
+    let jwtData = { ...data, exp: exp };
     let stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(jwtData));
     let encodedData = JwtTokenHelper.base64url(stringifiedData);
 
@@ -35,8 +35,8 @@ export class JwtTokenHelper {
     return token;
   };
 
-  public static CreateSigningToken = (data: any): string => {
-    let token = JwtTokenHelper.CreateUnsignedToken(data);
+  public static CreateSigningToken = (data: any, expiredTime?: number): string => {
+    let token = JwtTokenHelper.CreateUnsignedToken(data, expiredTime);
     let secret = 'My very confidential secret!';
 
     let signature = CryptoJS.HmacSHA256(token, secret);
@@ -90,7 +90,7 @@ export class JwtTokenHelper {
 
   public static get userName(): string | null {
     let userInfo = JwtTokenHelper.GetUserLoggedInInfo();
-    return (userInfo && (userInfo.userName || userInfo.email)) || null;
+    return (userInfo && userInfo.userName) || null;
   }
 
   public static get countryCode(): string | null {

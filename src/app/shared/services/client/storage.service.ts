@@ -16,7 +16,8 @@ export class StorageService implements StorageInterface {
   private _remember: boolean;
 
   onRemoveAllTokens(): Promise<void> {
-    return Promise.resolve(localStorage.clear());
+    var storage = this._remember ? localStorage : sessionStorage;
+    return Promise.resolve(storage.clear());
   }
 
   onRemoveTokens(tokens: string[]): Promise<void> {

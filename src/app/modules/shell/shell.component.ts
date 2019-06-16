@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientState } from '@app/shared/services/client/client-state';
 
 @Component({
   selector: 'app-shell',
@@ -9,7 +10,7 @@ export class ShellComponent implements OnInit {
   isToggleNav: boolean;
   isToggleSearch: boolean;
 
-  constructor() {}
+  constructor(private clientState: ClientState) {}
 
   ngOnInit() {}
 

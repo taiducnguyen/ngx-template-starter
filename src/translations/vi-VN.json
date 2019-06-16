@@ -2,7 +2,7 @@
   "Commons": {
     "Button": {
       "ResetPassword": "Reset Password",
-      "SignIn": "Sign In",
+      "SignIn": "Đăng nhập",
       "Save": "<i class='far fa-save mr-1'></i> Save",
       "Cancel": "<i class='fas fa-ban mr-1'></i> Cancel",
       "New": "<i class='fas fa-plus'></i> New",
@@ -23,7 +23,7 @@
       "SelectContact": "Select contact"
     },
     "Error": {
-      "ErrRequired": "This field is required",
+      "ErrRequired": "Đây là trường bắt buộc.",
       "ErrFormatEmail": "Email format should be <i>john@doe.com</i>",
       "ErrPatternPassword": "This is required field and at least 8 characters and have one capital and alphanumeric characters",
       "ErrPasswordMismatch": "Password mismatch",
@@ -38,7 +38,7 @@
     },
     "Texts": {
       "ResetYourPassword": "Reset Your Password",
-      "Password": "Password",
+      "Password": "Mật khẩu",
       "ConfirmPassword": "Confirm Password",
       "Preferences": "Preferences",
       "AuditTrail": "Audit Trail",
@@ -46,7 +46,7 @@
       "Email": "Email",
       "Profile": "Profile",
       "Company": "Company",
-      "Username": "Username",
+      "Username": "Tên đăng nhập",
       "FirstName": "First Name",
       "LastName": "Last Name",
       "Phone": "Phone",
@@ -57,10 +57,10 @@
       "Active": "Active"
     },
     "Required": {
-      "PasswordRequired": "Password<span class='required'></span>",
+      "PasswordRequired": "Mật khẩu<span class='required'></span>",
       "ConfirmPasswordRequired": "Confirm Password<span class='required'></span>",
       "EmailRequired": "Email<span class='required'></span>",
-      "UsernameRequired": "Username<span class='required'></span>",
+      "UsernameRequired": "Tên đăng nhập<span class='required'></span>",
       "OldPasswordRequired": "Old Password<span class='required'></span>",
       "NewPasswordRequired": "New Password<span class='required'></span>",
       "RepeatPasswordRequired": "Repeat Password<span class='required'></span>",
@@ -71,38 +71,12 @@
       "RoleRequired": "Role<span class='required'></span>",
       "RoleNameRequired": "Role Name<span class='required'></span>"
     },
-    "HttpError": {
-      "incorrectEmailOrPasssword": "Email or password is not correct.",
-      "emailNotExist": "Email is not exist",
-      "oldPassIncorrect": "Old password is not match.",
-      "userNotFound": "User is not found.",
-      "Default": "We discovered unexpected system error, please try again later or contact to admin with number phone 0986.686.868.",
-      "emailTemplateInvalid": "Invalid Email Template.",
-      "invalidDocument": "Document already existed.",
-      "userExisted": "Email or username for company already existed.",
-      "emailExists": "Email already existed.",
-      "userNameExists": "Username already existed.",
-      "userProfileIsNotImage": "The input data must be image",
-      "userNameNotFound": "Username is not exist",
-      "roleNameExist": "Role name already existed.",
-      "screenExisted": "Screen view already existed.",
-      "fieldExisted": "Field already existed.",
-      "screenFieldExisted": "Screen and field mapping already existed.",
-      "roleConfigurationExisted": "The mapping for role, screen and field already existed.",
-      "groupExisted": "Group already existed.",
-      "counterPartGroupExisted": "Counter part group already existed.",
-      "notificationExisted": "Notification Name already existed.",
-      "contactsExisted": "Email or username for company already existed.",
-      "passwordNotMatch": "Password and confirm password is not match.",
-      "userDeactive": "User is inactive, please contact administrator.",
-      "notFoundRecord": "No record found on the server !",
-      "notFoundWarehouse": "Warehouse is not found, please update warehouse information to update this file."
-    }
+    "HttpError": {}
   },
   "Components": {
     "LoginAndSignUp": {
-      "TxtLoginAndSignUp": "Log In or Sign Up",
-      "TxtForgotPassword": "Forgot Password",
+      "TxtLoginAndSignUp": "Đăng nhập hoặc đăng ký",
+      "TxtForgotPassword": "Quên mật khẩu",
       "TxtBackToLogin": "Back to login",
       "BtnSend": "Send",
       "TxtLoginFB": "<i class='fa fa-facebook'></i> Login with facebook",
@@ -126,7 +100,8 @@
       "Welcome": "Welcome To Supply Chain!",
       "Description": "Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.",
       "SignIn": "Sign In To Supply Chain",
-      "ForgotPassword": "Forgot Password ?"
+      "ForgotPassword": "Quên mật khẩu ?",
+      "RememberMe": "Ghi nhớ"
     },
     "ForgotPassword": {
       "PasswordRecovery": "Password Recovery"
@@ -145,8 +120,8 @@
   "Nav": {
     "AdminView": "Admin",
     "Admin": {
-      "EmailTemplate": "Danh sách Email",
-      "Employee": "Nhân viên"
+      "Home": "Trang chủ",
+      "About": "Giới thiệu"
     }
   }
 }

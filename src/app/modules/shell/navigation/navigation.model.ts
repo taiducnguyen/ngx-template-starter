@@ -47,7 +47,7 @@ export const navItems: AppNavItem[] = [
         children: [
           {
             id: 'email-templates',
-            translateKey: 'Nav.Admin.EmailTemplate',
+            translateKey: 'Nav.Admin.Home',
             title: 'Email Templates',
             icon: '',
             subIcon: '',
@@ -59,7 +59,7 @@ export const navItems: AppNavItem[] = [
           },
           {
             id: 'counterpart-group',
-            translateKey: 'Nav.Admin.Employee',
+            translateKey: 'Nav.Admin.About',
             title: 'Counterpart Group',
             icon: '',
             subIcon: '',

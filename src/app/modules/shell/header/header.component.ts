@@ -9,6 +9,7 @@ import { JwtTokenHelper } from '@app/shared/common';
 import { StorageService } from '@app/shared/services/client/storage.service';
 import { ClientState } from '@app/shared/services/client/client-state';
 import { LoginService } from '@app/shared/services/api/app/login.service';
+import { DropdownModel } from '@app/shared/models/dropdown/dropdown.model';
 
 @Component({
   selector: 'app-header',
@@ -63,7 +64,11 @@ export class HeaderComponent implements OnInit {
   };
 
   onLogout = () => {
-    // this.clientState.isBusy = true;
+    this.clientState.isBusy = true;
+    this.storageService.onRemoveAllTokens().then(res => {
+      this.router.navigate(['login']);
+      this.clientState.isBusy = false;
+    });
     // Promise.all([
     //   this.loginService.onLogout(this.userInfo.userId),
     //   this.storageService.onRemoveTokens([StorageKey.User, StorageKey.Token, StorageKey.UserInfo]),
@@ -81,6 +86,19 @@ export class HeaderComponent implements OnInit {
     this.onToggleNav.emit(this.isToggleNav);
   };
 
+  get currentLanguage(): string {
+    return this.i18nService.language;
+  }
+
+  get languages(): DropdownModel[] {
+    return this.i18nService.supportedLanguages.map(l => {
+      return <DropdownModel>{ value: l, text: l.toString(), selected: l == this.currentLanguage };
+    });
+  }
+
+  setLanguage(languageDropdown: DropdownModel) {
+    this.i18nService.language = languageDropdown.value.toString();
+  }
   ngOnDestroy(): void {
     // this.clientState.reloadUserProfile.unsubscribe();
   }

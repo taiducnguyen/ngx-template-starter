@@ -19,7 +19,7 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.selected && this.data) {
-      this.selectedItem = this.data[0];
+      this.selectedItem = this.data.find(d => d.selected) || this.data[0];
     }
   }
 

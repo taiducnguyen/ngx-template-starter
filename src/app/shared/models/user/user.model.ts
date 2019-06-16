@@ -18,18 +18,13 @@ export class UserLogedinModel extends BaseModel {
   constructor() {
     super();
   }
-  userId: number;
-  token: string;
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+  userId: string;
   userName: string;
-  email?: string;
-  expired: number;
-  phone?: string;
-  active?: boolean;
+  userType: UserRole;
   roles?: UserRole[];
-  userType?: UserType;
-  roleId?: number;
-  roleName?: string;
-  systemAdmin?: boolean;
 }
 
 export class UserChangePasswordModel extends BaseModel {
@@ -83,11 +78,14 @@ export class UserResetPasswordModel {
 }
 
 export class UserContextModel {
-  userName: string;
+  username: string;
   password: string;
   email?: string;
   remember?: boolean;
-  constructor() {}
+  grant_type?: string;
+  constructor() {
+    this.grant_type = 'password';
+  }
 }
 
 export class UserInfoModel {

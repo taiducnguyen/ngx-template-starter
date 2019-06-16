@@ -37,9 +37,6 @@ import { ShellModule } from './modules/shell/shell.module';
     CoreModule,
     SharedModule,
     ShellModule,
-    HomeModule,
-    AboutModule,
-    LoginModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent, NoContentComponent, AccessDeniedComponent],

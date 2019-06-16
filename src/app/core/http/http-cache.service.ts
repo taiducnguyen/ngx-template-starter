@@ -14,7 +14,7 @@ export interface HttpCacheEntry {
 /**
  * Provides a cache facility for HTTP requests with configurable persistence policy.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpCacheService {
   private cachedData: { [key: string]: HttpCacheEntry } = {};
   private storage: Storage | null = null;

@@ -6,5 +6,5 @@ export class ApiUrl {
   public static UserIPAddress = 'https://ipinfo.io/json';
 
   //--Login
-  public static Login = ApiUrl.BaseUrl + '';
+  public static Login = ApiUrl.BaseUrl + 'token';
 }
