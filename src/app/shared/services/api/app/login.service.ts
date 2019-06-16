@@ -4,28 +4,24 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpService } from '../../http/http.service';
 import { ApiHelper } from 'app/shared/services/api-helper';
 import { ApiUrl } from '../../api-url/api-url';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { UserContextModel } from '@app/shared/models/user/user.model';
+import { ApiResponse } from '@app/shared/models/api-response/api-response';
 
 export interface ILoginInterface {
-  // onLogin(userLogin: UserLoginModel): Observable<ApiResponse>;
+  onLogin(userContext: UserContextModel): Observable<ApiResponse>;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService implements ILoginInterface {
-  constructor(private http: HttpService, private httpClient: HttpClient) {}
+  constructor(private http: HttpService) {}
 
-  // onLogin = (userLogin: UserLoginModel): Observable<ApiResponse> => {
-
-  //     let headers: HttpHeaders = new HttpHeaders();
-  //     headers.append("Authorization", "Basic " + btoa(userLogin.userName + ":" + userLogin.password));
-  //     headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-  //     const params = new HttpParams().set('username', userLogin.userName).set('password', userLogin.password).set('grant_type', 'password');
-
-  //     return this.httpClient.post(ApiUrl.Login, {}, { headers: headers, params }).pipe(
-  //         map(ApiHelper.extractData),
-  //         catchError(ApiHelper.onFail));
-  // }
+  onLogin(userContext: UserContextModel): Observable<ApiResponse> {
+    let body = JSON.stringify(userContext);
+    return this.http.HttpPost(ApiUrl.Login, body, false).pipe(
+      map(ApiHelper.extractData),
+      catchError(ApiHelper.onFail)
+    );
+  }
 }

@@ -1,6 +1,7 @@
-export class ApiUrl {
-  static BaseUrl = 'http://42.112.210.46:9191';
+import { environment } from '@env/environment.prod';
 
+export class ApiUrl {
+  static BaseUrl = environment.serverUrl;
   // IP APi
   public static UserIPAddress = 'https://ipinfo.io/json';
 

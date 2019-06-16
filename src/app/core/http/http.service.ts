@@ -56,7 +56,7 @@ export const HTTP_DYNAMIC_INTERCEPTORS = new InjectionToken<HttpInterceptor>('HT
  * Extends HttpClient with per request configuration using dynamic interceptors.
  */
 @Injectable()
-export class HttpService extends HttpClient {
+export class HttpServiceTemp extends HttpClient {
   constructor(
     private httpHandler: HttpHandler,
     private injector: Injector,
@@ -92,15 +92,15 @@ export class HttpService extends HttpClient {
     return new HttpClient(handler).request(method, url, options);
   }
 
-  private removeInterceptor(interceptorType: Function): HttpService {
-    return new HttpService(
+  private removeInterceptor(interceptorType: Function): HttpServiceTemp {
+    return new HttpServiceTemp(
       this.httpHandler,
       this.injector,
       this.interceptors.filter(i => !(i instanceof interceptorType))
     );
   }
 
-  private addInterceptor(interceptor: HttpInterceptor): HttpService {
-    return new HttpService(this.httpHandler, this.injector, this.interceptors.concat([interceptor]));
+  private addInterceptor(interceptor: HttpInterceptor): HttpServiceTemp {
+    return new HttpServiceTemp(this.httpHandler, this.injector, this.interceptors.concat([interceptor]));
   }
 }

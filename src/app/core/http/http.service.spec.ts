@@ -2,13 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient, HttpInterceptor } from '@angular/common/http';
 
-import { HttpService } from './http.service';
+import { HttpServiceTemp } from './http.service';
 import { HttpCacheService } from './http-cache.service';
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 import { CacheInterceptor } from './cache.interceptor';
 import { ApiPrefixInterceptor } from './api-prefix.interceptor';
 
-describe('HttpService', () => {
+describe('HttpServiceTemp', () => {
   let httpCacheService: HttpCacheService;
   let http: HttpClient;
   let httpMock: HttpTestingController;
@@ -24,7 +24,7 @@ describe('HttpService', () => {
         HttpCacheService,
         {
           provide: HttpClient,
-          useClass: HttpService
+          useClass: HttpServiceTemp
         }
       ]
     });
@@ -34,7 +34,7 @@ describe('HttpService', () => {
     httpCacheService = TestBed.get(HttpCacheService);
 
     const realRequest = http.request;
-    spyOn(HttpService.prototype, 'request').and.callFake(function(
+    spyOn(HttpServiceTemp.prototype, 'request').and.callFake(function(
       this: any,
       method: string,
       url: string,

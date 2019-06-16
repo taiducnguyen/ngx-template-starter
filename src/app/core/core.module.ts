@@ -4,11 +4,8 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouteReusableStrategy } from './route-reusable-strategy';
-import { AuthenticationService } from './authentication/authentication.service';
-import { CredentialsService } from './authentication/credentials.service';
-import { AuthenticationGuard } from './authentication/authentication.guard';
 import { I18nService } from './i18n.service';
-import { HttpService } from './http/http.service';
+import { HttpServiceTemp } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
@@ -17,17 +14,14 @@ import { CacheInterceptor } from './http/cache.interceptor';
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
   providers: [
-    AuthenticationService,
-    CredentialsService,
-    AuthenticationGuard,
     I18nService,
-    HttpCacheService,
+    HttpServiceTemp,
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
     CacheInterceptor,
     {
       provide: HttpClient,
-      useClass: HttpService
+      useClass: HttpServiceTemp
     },
     {
       provide: RouteReuseStrategy,

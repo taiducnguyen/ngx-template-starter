@@ -110,3 +110,72 @@ span {
   overflow-x: hidden;
   background: $white3;
 }
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.required {
+  display: inline-block;
+  &::before {
+    content: "*";
+    color: $lightRedMercon;
+    margin-left: 5px;
+  }
+}
+
+.inside-block {
+  #preloader {
+    position: absolute;
+  }
+}
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 999999;
+  display: none;
+  &.active {
+    display: block;
+  }
+  .canvas {
+    height: 100%;
+  }
+  .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
+
+.spinner {
+  animation: spinner 1s linear infinite;
+  border: solid 5px transparent;
+  border-top: solid 5px $darkGreenMercon;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  font-size: 11px;
+  margin-top: 6px;
+  color: $lightRedMercon !important;
+}

@@ -3,9 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
-import { MockAuthenticationService } from '@app/core/authentication/authentication.service.mock';
-import { MockCredentialsService } from '@app/core/authentication/credentials.service.mock';
+import { I18nService } from '@app/core';
 import { FooterComponent } from './footer.component';
 
 describe('HeaderComponent', () => {
@@ -16,11 +14,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NgbModule, TranslateModule.forRoot()],
       declarations: [FooterComponent],
-      providers: [
-        { provide: AuthenticationService, useClass: MockAuthenticationService },
-        { provide: CredentialsService, useClass: MockCredentialsService },
-        I18nService
-      ]
+      providers: [I18nService]
     }).compileComponents();
   }));
 

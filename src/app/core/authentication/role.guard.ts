@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { StorageKey } from '../../models/storage-key/storage-key';
 import { JwtTokenHelper } from 'app/shared/common';
-import { AppAuthService } from './auth.service';
+import { AuthenticationService } from '..';
+import { StorageKey } from '@app/shared/models/storage-key/storage-key';
 
-@Injectable()
-export class RoleGuardService implements CanActivate {
-  constructor(public router: Router, public auth: AppAuthService) {}
+@Injectable({
+  providedIn: 'root'
+})
+export class RoleGuard implements CanActivate {
+  constructor(public router: Router, private auth: AuthenticationService) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     // this will be passed from the route config
     // on the data property

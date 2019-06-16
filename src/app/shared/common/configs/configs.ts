@@ -26,37 +26,6 @@ export module Configs {
   export const FileExtensions = ['docx', 'doc', 'pdf'];
   export const FileExtensionsContainer = ['xls', 'xlsx'];
 
-  export const defaultPageSize = 25;
-  export const defaultFirstPageLazyLoad = 5;
-  export const defaultSecondPageLazyLoad = 2;
-
-  export const AccountTypes = [{ value: 1, text: 'Private' }, { value: 2, text: 'Company' }];
-
-  export const UserRoles = [
-    { value: 'admin', label: 'Admin' },
-    { value: 'owner', label: 'Owner' },
-    { value: 'guest', label: 'Guest' }
-  ];
-
-  export const AppSuffix = 'sp';
-
-  export enum RouterUrl {
-    TradeInfo = 'sp/trade-info',
-    PreShipmentSample = 'sp/preshipment-sample',
-    ShippingInstructions = 'sp/shipping-instructions',
-    DocumentRepository = 'sp/document-repository',
-    Booking = 'sp/booking',
-    ShippingAdvice = 'sp/shipping-advice',
-    Invoicing = 'sp/invoicing',
-    Custom = 'sp/custom',
-    Trucker = 'sp/trucker',
-    Warehouse = 'sp/warehouse',
-    DeliveryOrder = 'sp/delivery-order',
-    CoverLetter = 'sp/cover-letter',
-    ArrivalSample = 'sp/arrival-sample',
-    CounterpartConfiguration = 'counterpart-configuration'
-  }
-
   export function NewGuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = (Math.random() * 16) | 0,

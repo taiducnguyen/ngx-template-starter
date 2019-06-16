@@ -32,7 +32,7 @@ export const navItems: AppNavItem[] = [
     icon: '',
     type: 'nav-category',
     url: 'admin-view',
-    allowRoles: [UserRole.Admin, UserRole.MerconEmployee],
+    allowRoles: [UserRole.Admin],
     children: [
       {
         id: 'email-templates',
@@ -43,7 +43,7 @@ export const navItems: AppNavItem[] = [
         type: 'nav-parent',
         url: 'category',
         isActive: false,
-        allowRoles: [UserRole.Admin, UserRole.MerconEmployee],
+        allowRoles: [UserRole.Admin],
         children: [
           {
             id: 'email-templates',

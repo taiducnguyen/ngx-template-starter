@@ -2,9 +2,16 @@ import { FileModel } from '../file/file.model';
 import { BaseModel } from '../base.model';
 
 export enum UserRole {
-  Admin = 1,
-  MerconEmployee = 2,
-  Exporter = 3
+  Offline = 1, //Offline
+  Employee = 2, //Employee
+  HR = 3, //HR
+  Admin = 4, //Admin
+  Customer = 5, //Customer
+  CustomerVip = 6, //CustomerVip
+  NailTech = 7, //NailTech
+  NailTechVip = 8, //NailTechVip
+  Salon = 9, //Salon
+  SalonVip = 10 //SalonVip
 }
 
 export class UserLogedinModel extends BaseModel {
@@ -75,14 +82,12 @@ export class UserResetPasswordModel {
   rePassword: string;
 }
 
-export class UserLoginModel {
+export class UserContextModel {
   userName: string;
   password: string;
   email?: string;
-  // grant_type?: string;
-  constructor() {
-    // this.grant_type = "password";
-  }
+  remember?: boolean;
+  constructor() {}
 }
 
 export class UserInfoModel {
@@ -110,8 +115,8 @@ export class UserRoleGroup {
 }
 
 export enum UserType {
-  Internal = 1,
-  External = 2
+  Online = 1,
+  Offline = 2
 }
 
 export enum UserStatus {

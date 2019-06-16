@@ -1,12 +1,10 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
-import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
+import { I18nService, AuthenticationService } from '@app/core';
 import { AppNavModel, AppNavItem } from '@app/shared/models/app-nav/app-nav.model';
 import { navItems } from './navigation.model';
 import { UserRole, UserLogedinModel } from '@app/shared/models/user/user.model';
 import { JwtTokenHelper } from '@app/shared/common';
-import { AppAuthService } from '@app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -22,7 +20,7 @@ export class NavigationComponent implements OnInit {
   private isAuthen: boolean;
   private userInfo: UserLogedinModel;
 
-  constructor(private router: Router, private i18nService: I18nService, private authService: AppAuthService) {
+  constructor(private router: Router, private i18nService: I18nService, private authService: AuthenticationService) {
     this.isAuthen = this.authService.isAuthenticated();
 
     if (this.isAuthen) {

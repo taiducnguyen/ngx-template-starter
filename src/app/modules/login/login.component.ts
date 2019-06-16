@@ -1,78 +1,67 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
-
-import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService, untilDestroyed } from '@app/core';
-
-const log = new Logger('Login');
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StorageKey } from '../../shared/models/storage-key/storage-key';
+import { JwtTokenHelper } from '../../shared/common';
+import { UserContextModel, UserType, UserRole, UserLogedinModel } from '@app/shared/models/user/user.model';
+import { ApiError } from '@app/shared/models/api-response/api-response';
+import { ClientState } from '@app/shared/services/client/client-state';
+import { AuthenticationService, I18nService } from '@app/core';
+import { StorageService } from '@app/shared/services/client/storage.service';
+import { LoginService } from '@app/shared/services/api/app/login.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  version: string = environment.version;
-  error: string | undefined;
-  loginForm!: FormGroup;
-  isLoading = false;
-
+export class LoginComponent implements OnInit {
+  private userContextModel: UserContextModel = new UserContextModel();
+  private isError: boolean;
+  private loginError: ApiError;
+  private returnUrl: string;
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private i18nService: I18nService,
-    private authenticationService: AuthenticationService
-  ) {
-    this.createForm();
+    private router: Router,
+    private clientState: ClientState,
+    private authenService: AuthenticationService,
+    private storageService: StorageService,
+    private loginService: LoginService,
+    private i18nService: I18nService
+  ) {}
+
+  public ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if (this.authenService.isAuthenticated()) {
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
-  ngOnInit() {}
+  onLogin = (form: NgForm) => {
+    if (form.invalid) {
+      return;
+    }
+    this.isError = false;
+    this.clientState.isBusy = true;
+    this.storageService.onRemoveToken(StorageKey.UserInfo);
+    this.loginService.onLogin(this.userContextModel).subscribe(
+      res => {
+        let userLoggedinModel = <UserLogedinModel>{ ...res.content };
+        // userLoggedinModel.roles = userLoggedinModel.ro ? [UserRole.Admin]
+        //   : userLoggedinModel.userType == UserType.Online ? [UserRole.MerconEmployee] : [];
 
-  ngOnDestroy() {}
-
-  login() {
-    this.isLoading = true;
-    const login$ = this.authenticationService.login(this.loginForm.value);
-    login$
-      .pipe(
-        finalize(() => {
-          this.loginForm.markAsPristine();
-          this.isLoading = false;
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe(
-        credentials => {
-          log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
-        },
-        error => {
-          log.debug(`Login error: ${error}`);
-          this.error = error;
+        if (userLoggedinModel && userLoggedinModel.token) {
+          this.storageService.onSetToken(StorageKey.Token, userLoggedinModel.token);
+          this.storageService.onSetToken(StorageKey.User, JwtTokenHelper.CreateSigningToken(userLoggedinModel));
+          this.router.navigate([this.returnUrl]);
         }
-      );
-  }
-
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
-
-  private createForm() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      remember: true
-    });
-  }
+        this.clientState.isBusy = false;
+      },
+      (err: ApiError) => {
+        this.isError = true;
+        this.loginError = err;
+        this.clientState.isBusy = false;
+      }
+    );
+  };
 }

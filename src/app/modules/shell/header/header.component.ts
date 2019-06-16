@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
+import { AuthenticationService, I18nService } from '@app/core';
 import { StorageKey } from '@app/shared/models/storage-key/storage-key';
 import { ApiError } from '@app/shared/models/api-response/api-response';
 import { UserProfileModel, UserLogedinModel } from '@app/shared/models/user/user.model';
 import { JwtTokenHelper } from '@app/shared/common';
-import { AppAuthService } from '@app/shared/services/auth/auth.service';
 import { StorageService } from '@app/shared/services/client/storage.service';
 import { ClientState } from '@app/shared/services/client/client-state';
 import { LoginService } from '@app/shared/services/api/app/login.service';
@@ -26,7 +25,7 @@ export class HeaderComponent implements OnInit {
   private userProfile: UserProfileModel = new UserProfileModel();
   constructor(
     private router: Router,
-    private authService: AppAuthService,
+    private authService: AuthenticationService,
     private storageService: StorageService,
     private clientState: ClientState,
     private loginService: LoginService,

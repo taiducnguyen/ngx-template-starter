@@ -1,78 +1,102 @@
-<div class="login-container bg-light">
-  <div class="login-box">
-    <h1 translate>APP_NAME</h1>
-    <div>
-      <h6 class="d-inline-block">v{{ version }}</h6>
-      <div class="d-inline-block ml-3" ngbDropdown>
-        <button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>
-          {{ currentLanguage }}
-        </button>
-        <div ngbDropdownMenu aria-labelledby="language-dropdown">
-          <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-            {{ language }}
-          </button>
-        </div>
+<div class="container-fluid no-padding h-100">
+  <div class="row flex-row h-100 bg-white">
+    <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+      <div class="supplychain-bg background-01">
+        <div class="supplychain-overlay overlay-01"></div>
+        <!-- <div class="authentication-col-content mx-auto">
+                  <h1 class="gradient-text-01" [innerHTML]="'Components.Login.Welcome' | translate"></h1>
+              </div> -->
       </div>
     </div>
-    <div class="container">
-      <div class="card col-md-6 mt-3 mx-auto">
-        <div class="card-body">
-          <h4 class="card-title text-center">
-            <i class="far fa-3x fa-user-circle text-muted"></i>
-          </h4>
-          <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-            <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
-              Username or password incorrect.
+
+    <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
+      <div class="authentication-form mx-auto">
+        <div class="logo-centered">
+          <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <img src="assets/images/logo_mercon.png" alt="logo" />
+          </a>
+        </div>
+        <h3 [innerHTML]="'Components.Login.SignIn' | translate"></h3>
+        <form (ngSubmit)="onLogin(f)" #f="ngForm">
+          <div class="group material-input">
+            <input
+              type="text"
+              inputFocus
+              noSpaces
+              name="email"
+              [(ngModel)]="userContextModel.userName"
+              #email="ngModel"
+              required
+            />
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label [innerHTML]="'Commons.Required.UsernameRequired' | translate"></label>
+            <div *ngIf="email.invalid && (email.dirty || email.touched || f.submitted)" class="error">
+              <div *ngIf="email.errors?.whitespace" [innerHTML]="'Commons.Error.ErrWhiteSpace' | translate"></div>
+              <div *ngIf="email.errors?.required" [innerHTML]="'Commons.Error.ErrRequired' | translate"></div>
+              <div *ngIf="email.errors?.pattern" [innerHTML]="'Commons.Error.ErrFormatEmail' | translate"></div>
             </div>
-            <div class="form-group">
-              <label class="d-block">
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="username"
-                  autocomplete="username"
-                  [placeholder]="'Username' | translate"
-                />
-                <span hidden translate>Username</span>
-                <small
-                  [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
-                  class="text-danger"
-                  translate
-                >
-                  Username is required
-                </small>
-              </label>
-              <label class="d-block">
-                <input
-                  type="password"
-                  class="form-control"
-                  formControlName="password"
-                  autocomplete="current-password"
-                  [placeholder]="'Password' | translate"
-                  required
-                />
-                <span hidden translate>Password</span>
-                <small
-                  [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
-                  class="text-danger"
-                  translate
-                >
-                  Password is required
-                </small>
-              </label>
+          </div>
+          <div class="group material-input">
+            <input
+              type="password"
+              inputFocus
+              noSpaces
+              name="password"
+              [(ngModel)]="userContextModel.password"
+              #password="ngModel"
+              required
+            />
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label [innerHTML]="'Commons.Required.PasswordRequired' | translate"></label>
+            <div *ngIf="password.invalid && (password.dirty || password.touched || f.submitted)" class="error">
+              <div *ngIf="password.errors?.whitespace" [innerHTML]="'Commons.Error.ErrWhiteSpace' | translate"></div>
+              <div *ngIf="password.errors?.required" [innerHTML]="'Commons.Error.ErrRequired' | translate"></div>
+            </div>
+          </div>
+          <div
+            *ngIf="f.submitted && isError"
+            class="form-input error"
+            [innerHTML]="i18nService.getTransError(loginError)"
+          ></div>
+          <div class="row">
+            <div class="col col-xs-12 col-sm-6">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" formControlName="remember" />
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="remember"
+                    [(ngModel)]="userContextModel.remember"
+                  />
                   <span translate>Remember me</span>
                 </label>
               </div>
             </div>
-            <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid || isLoading">
-              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
-              <span translate>Login</span>
-            </button>
-          </form>
-        </div>
+            <div class="col col-xs-12 col-sm-6 text-right">
+              <a
+                [routerLink]="['', 'forgot-password']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [innerHTML]="'Components.Login.ForgotPassword' | translate"
+                >Forgot Password?</a
+              >
+            </div>
+          </div>
+          <div class="sign-btn text-center">
+            <button
+              type="submit"
+              [disabled]="clientState.isBusy"
+              [disabled]="clientState.isBusy"
+              class="btn btn-success"
+              [innerHTML]="'Commons.Button.SignIn' | translate"
+            ></button>
+          </div>
+        </form>
+      </div>
+      <div [hidden]="!clientState.isBusy" class="inside-block">
+        <loading-state></loading-state>
       </div>
     </div>
   </div>
