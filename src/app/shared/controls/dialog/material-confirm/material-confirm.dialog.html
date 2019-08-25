@@ -1,0 +1,17 @@
+<div class="mat-confirm-dialog">
+  <h2 mat-dialog-title class="mb-0">{{data && data.title || "Confirm"}}</h2>
+  <hr />
+  <div mat-dialog-content>
+    <p>{{data && data.content || "Hi, I'm dialog content"}}</p>
+    <span *ngIf="!!data.subContent">{{data && data.subContent}}</span>
+  </div>
+  <hr />
+  <div mat-dialog-actions>
+    <button mat-button class="primary" color="primary" tabindex="-1" (click)="onCloseDialog(true)">
+      {{data && data.confirmText || "Đồng ý"}}
+    </button>
+    <button mat-button class="warn" color="warn" (click)="onCloseDialog(false)">
+      {{data && data.closeText || "Hủy"}}
+    </button>
+  </div>
+</div>

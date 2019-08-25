@@ -1,0 +1,13 @@
+<div class="mat-snack-bar-wrapper">
+  <div class="mat-snack-bar-content {{ (data && messageType[data.type]) || 'Normal' }}" [ngSwitch]="data.type">
+    <mat-icon *ngSwitchCase="1">error</mat-icon>
+    <mat-icon *ngSwitchCase="2">warning</mat-icon>
+    <mat-icon *ngSwitchCase="3">done</mat-icon>
+    <p>{{ (data && data.content) || "I'm Content" }}</p>
+  </div>
+  <div class="mat-snack-bar-action">
+    <button mat-icon-button (click)="onDismissSnackBar()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>

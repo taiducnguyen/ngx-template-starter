@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Logger } from './logger.service';
 import enUS from '../../translations/en-US.json';
 import viVN from '../../translations/vi-VN.json';
-import { ApiError } from '@app/shared/models/api-response/api-response';
+import { ApiError, ApiDescriptionError } from '@app/shared/models/api-response/api-response';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
@@ -92,14 +92,24 @@ export class I18nService {
   }
 
   getTransError = (error: ApiError) => {
-    if (!error) {
-      return;
-    }
-    let key = 'Commons.HttpError.' + error.errorType;
+    let key = 'Commons.HttpError.' + (error && error.error ? error.error : '');
     let translated = this.translateService.instant(key);
     if (translated == key) {
-      return error.message || this.translateService.instant('Commons.HttpError.Default');
-      //return this.translateService.instant('Commons.HttpError.Default');
+      return error && error.errorMessage
+        ? error.errorMessage
+        : this.translateService.instant('Commons.HttpError.Default');
+    } else {
+      return translated;
+    }
+  };
+
+  getTransErrorDescription = (error: ApiDescriptionError) => {
+    let key = 'Commons.HttpError.' + (error && error.error ? error.error : '');
+    let translated = this.translateService.instant(key);
+    if (translated == key) {
+      return error && error.error_description
+        ? error.error_description
+        : this.translateService.instant('Commons.HttpError.Default');
     } else {
       return translated;
     }

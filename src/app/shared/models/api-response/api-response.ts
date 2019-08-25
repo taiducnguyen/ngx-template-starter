@@ -19,6 +19,13 @@ export interface PagingModel {
 
 export interface ApiError {
   status: number;
+  errorMessage: string;
   message: string;
-  errorType: string;
+  error: string;
+}
+
+export interface ApiDescriptionError {
+  status: number;
+  error_description: string;
+  error: string;
 }
