@@ -71,7 +71,9 @@
       "RoleRequired": "Role<span class='required'></span>",
       "RoleNameRequired": "Role Name<span class='required'></span>"
     },
-    "HttpError": {}
+    "HttpError": {
+      "login_fail": "Username or password is not correct, please try again."
+    }
   },
   "Components": {
     "LoginAndSignUp": {
@@ -90,7 +92,7 @@
       "TxtVerifyAccount": "Verify your account"
     },
     "Footer": {
-      "Copyright": "Copyright © 2018 Mercon Coffee Group. All rights reserved.",
+      "Copyright": "Copyright © 9 TN Group. All rights reserved.",
       "Version": "Version 1.0"
     },
     "ResetPassword": {
@@ -115,6 +117,12 @@
     "EmailGenerated": {
       "SubmitNotifications": "Submit Notifications",
       "DeleteNotifications": "Delete Notifications"
+    },
+    "HomePage": {
+      "Title": "Home"
+    },
+    "AboutPage": {
+      "Title": "About"
     }
   },
   "Nav": {

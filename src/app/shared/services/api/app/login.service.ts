@@ -16,17 +16,21 @@ export interface ILoginInterface {
   providedIn: 'root'
 })
 export class LoginService implements ILoginInterface {
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpClient) {}
 
   onLogin(userContext: UserContextModel): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = {
+      headers: headers
+    };
+
     const params = new HttpParams()
       .set('username', userContext.username)
       .set('password', userContext.password)
       .set('grant_type', 'password');
     let body = params.toString();
 
-    return this.http.HttpPostHeader(ApiUrl.Login, headers, body).pipe(
+    return this.http.post(ApiUrl.Login, body, options).pipe(
       map(ApiHelper.extractData),
       catchError(ApiHelper.onFail)
     );

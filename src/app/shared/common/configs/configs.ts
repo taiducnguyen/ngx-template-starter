@@ -1,4 +1,4 @@
-import { MatSnackBarConfig } from '@angular/material';
+// import { MatSnackBarConfig } from '@angular/material';
 
 export module Configs {
   export const StartYear = 2015;
@@ -36,10 +36,10 @@ export module Configs {
     });
   }
 
-  export const MatSnackBarDefaultConfig: MatSnackBarConfig = {
-    duration: 15 * 1000,
-    verticalPosition: 'top',
-    panelClass: 'snack-bar-container',
-    horizontalPosition: 'right'
-  };
+  // export const MatSnackBarDefaultConfig: MatSnackBarConfig = {
+  //   duration: 15 * 1000,
+  //   verticalPosition: 'top',
+  //   panelClass: 'snack-bar-container',
+  //   horizontalPosition: 'right'
+  // };
 }

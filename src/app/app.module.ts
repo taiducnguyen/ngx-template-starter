@@ -19,8 +19,8 @@ import { StorageKey } from './shared/models/storage-key/storage-key';
 import { NoContentComponent } from './404/not-found.component';
 import { AccessDeniedComponent } from './403/access-denied.component';
 import { ShellModule } from './modules/shell/shell.module';
-import { MaterialConfirmDialogComponent, SnackBarComponent } from './shared/controls';
-import { MaterialModule } from './shared/material.module';
+// import { MaterialConfirmDialogComponent, SnackBarComponent } from './shared/controls';
+// import { MaterialModule } from './shared/material.module';
 
 @NgModule({
   imports: [
@@ -38,19 +38,19 @@ import { MaterialModule } from './shared/material.module';
     NgbModule,
     CoreModule,
     ShellModule,
-    MaterialModule,
+    // MaterialModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [
     AppComponent,
     NoContentComponent,
-    AccessDeniedComponent,
-    MaterialConfirmDialogComponent,
-    SnackBarComponent
+    AccessDeniedComponent
+    // MaterialConfirmDialogComponent,
+    // SnackBarComponent
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [MaterialConfirmDialogComponent, SnackBarComponent]
+  bootstrap: [AppComponent]
+  // entryComponents: [MaterialConfirmDialogComponent, SnackBarComponent]
 })
 export class AppModule {}
 

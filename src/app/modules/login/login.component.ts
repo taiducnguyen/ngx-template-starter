@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    if (this.authenService.isAuthenticated()) {
-      this.router.navigate([this.returnUrl]);
-    }
+    // if (this.authenService.isAuthenticated()) {
+    //   this.router.navigate([this.returnUrl]);
+    // }
   }
 
   get currentLanguage(): string {
@@ -52,26 +52,37 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    this.isError = false;
     this.clientState.isBusy = true;
-    this.storageService.onRemoveToken(StorageKey.UserInfo);
-    this.loginService.onLogin(this.userContextModel).subscribe(
-      res => {
-        let userLoggedinModel = <UserLogedinModel>{ ...res };
-        userLoggedinModel.roles = [userLoggedinModel.userType];
-        if (userLoggedinModel && userLoggedinModel.access_token) {
-          this.storageService.onSetToken(StorageKey.Token, userLoggedinModel.access_token);
-          this.storageService.onSetToken(StorageKey.User, JwtTokenHelper.CreateSigningToken(userLoggedinModel));
-          this.router.navigate([this.returnUrl]);
-        }
-        this.clientState.isBusy = false;
-      },
-      (err: ApiError) => {
-        this.isError = true;
-        this.loginError = err;
-        this.clientState.isBusy = false;
-      }
-    );
+    this.isError = false;
+    if (this.userContextModel.username == 'admin@test.com' && this.userContextModel.password == '123456') {
+      this.router.navigate([this.returnUrl]);
+      this.clientState.isBusy = false;
+    } else {
+      this.isError = true;
+      this.clientState.isBusy = false;
+      this.loginError = <ApiError>{
+        error: 'login_fail',
+        errorMessage: 'Sai thông tin đăng nhập, vui lòng thử lại.'
+      };
+    }
+    // this.storageService.onRemoveToken(StorageKey.UserInfo);
+    // this.loginService.onLogin(this.userContextModel).subscribe(
+    //   res => {
+    //     let userLoggedinModel = <UserLogedinModel>{ ...res };
+    //     userLoggedinModel.roles = [userLoggedinModel.userType];
+    //     if (userLoggedinModel && userLoggedinModel.access_token) {
+    //       this.storageService.onSetToken(StorageKey.Token, userLoggedinModel.access_token);
+    //       this.storageService.onSetToken(StorageKey.User, JwtTokenHelper.CreateSigningToken(userLoggedinModel));
+    //       this.router.navigate([this.returnUrl]);
+    //     }
+    //     this.clientState.isBusy = false;
+    //   },
+    //   (err: ApiError) => {
+    //     this.isError = true;
+    //     this.loginError = err;
+    //     this.clientState.isBusy = false;
+    //   }
+    // );
   };
 
   setLanguage(languageDropdown: DropdownModel) {
