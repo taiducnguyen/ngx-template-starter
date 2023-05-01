@@ -49,7 +49,7 @@
     "@angular/cli": "~7.3.0",
     "@angular/compiler-cli": "^7.2.3",
     "@angular/language-service": "^7.2.3",
-    "@biesbjerg/ngx-translate-extract": "^2.3.4",
+    "@biesbjerg/ngx-translate-extract": "^7.0.4",
     "@ngx-rocket/scripts": "^3.0.0",
     "@types/angular-jwt": "0.0.29",
     "@types/crypto-js": "^3.1.43",
